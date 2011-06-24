@@ -21,7 +21,7 @@ class TestView(TestCase):
         m.invokeFactory(type_name='File', id='f1')
         f1 = getattr(m, 'f1')
         f1.edit(title='File 1', file='Lorem ipsum')
-        self.assertTrue('Scarica il file File 1' in m())
+        self.assertTrue('Download the file File 1' in m())
 
     def test_addInternalLink(self):
         m = self.getModulistica()
@@ -40,7 +40,7 @@ class TestView(TestCase):
         l1.edit(title='Link 1', remoteUrl='http://www.plone.org/')
         result = m()
         self.assertTrue('Visita Link 1' in result)
-        self.assertEquals(len(re.findall('ollegamento\ esterno',result)), 1)
+        self.assertEquals(len(re.findall('xternal link',result)), 1)
 
     def test_addExternalLinkWithDescr(self):
         """When external link has also descr, show tip text and description with additional text"""
@@ -50,7 +50,7 @@ class TestView(TestCase):
         l1.edit(title='Link 1', remoteUrl='http://www.plone.org/', description="Go to plone.org")
         result = m()
         self.assertTrue('Visita Link 1' in result)
-        self.assertEquals(len(re.findall('external link',result)), 2)
+        self.assertEquals(len(re.findall('xternal link',result)), 2)
 
     def test_noHTTPExternalLink(self):
         """All links that don't starts with HTTP(s) are not external"""

@@ -79,8 +79,8 @@ Credits
 Developed with the support of `Camera di Commercio di Ferrara`__;
 Camera di Commercio di Ferrara supports the `PloneGov initiative`__.
 
-  .. image:: http://www.fe.camcom.it/cciaa-logo.png/
-     :alt: CCIAA Ferrara - logo
+.. image:: http://www.fe.camcom.it/cciaa-logo.png/
+   :alt: CCIAA Ferrara - logo
 
 __ http://www.fe.camcom.it/
 __ http://www.plonegov.it/

@@ -3,7 +3,7 @@
 import os
 from setuptools import setup, find_packages
 
-version = '2.0.0dev'
+version = '2.0.0'
 
 tests_require=['zope.testing']
 
@@ -22,7 +22,7 @@ setup(name='cciaa.modulistica',
       keywords='plone plonegov form file',
       author='RedTurtle Technology',
       author_email='sviluppoplone@redturtle.net',
-      url='https://code.redturtle.it/svn/camera_di_commercio_fe/C3P/cciaa.modulistica',
+      url='http://plone.org/products/cciaa.modulistica',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
       namespace_packages=['cciaa', ],
