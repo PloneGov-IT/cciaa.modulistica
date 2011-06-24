@@ -1,0 +1,62 @@
+# Italian translation for cciaa.modulistica
+# Luca Fabbri <keul@redturtle.it>, 2009
+msgid ""
+msgstr ""
+"Project-Id-Version: cciaa.modulistica\n"
+"POT-Creation-Date: 2011-06-24 13:58+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI +ZONE\n"
+"Last-Translator: Luca Fabbri <keul@redturtle.it>\n"
+"Language-Team: RedTurtle Technology <sviluppoplone@redturtle.it>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0\n"
+"Language-Code: it\n"
+"Language-Name: Italian\n"
+"Preferred-Encodings: utf-8 latin1\n"
+"Domain: cciaa.modulistica\n"
+
+msgid "CCIAA: Downloadable Forms view"
+msgstr "CCIAA: Vista modulistica"
+
+msgid "Downloadable forms view"
+msgstr "Vista modulistica"
+
+#: ../browser/modulistica.py:92
+msgid "External link"
+msgstr "Collegamento esterno"
+
+#: ../browser/cciaa_modulistica_view.pt:99
+msgid "Link"
+msgstr "Collegamento"
+
+msgid "Show and organize files in the folder."
+msgstr "Mostra e organizza la modulistica nella cartella."
+
+msgid "Some additional feature, mainly a new view, for make easy the download of forms and documents"
+msgstr "Qualche funzionalità aggiunta, principalente una vista, per gestire facilmente la modulistica scaricabile"
+
+#. Default: "Download the file ${title}"
+#: ../browser/modulistica.py:32
+msgid "download_message"
+msgstr "Scarica il file ${title}"
+
+#: ../browser/cciaa_modulistica_view.pt:174
+msgid "external link"
+msgstr "collegamento esterno"
+
+#. Default: "Go to link ${title}"
+#: ../browser/modulistica.py:36
+msgid "goto_message"
+msgstr "Vai al collegamento ${title}"
+
+#. Default: "Put there, one per line (up to 4), columns titles that must be put on the top of the created tables when using the files views. \nNot providing those values will not display any table headers."
+#: ../extender.py:28
+msgid "help_cciaafolder_columnstitles"
+msgstr "Inserisci, una per riga (fino a 4), i titoli delle colonne che saranno inserite in testa alle tabelle generate quando saranno in uso le viste per la modulistica. Non fornite questi valori farà si che le instestazioni non siano visualizzate."
+
+#. Default: "Columns titles"
+#: ../extender.py:27
+msgid "label_cciaafolder_columnstitles"
+msgstr "Titoli delle colonne"
+

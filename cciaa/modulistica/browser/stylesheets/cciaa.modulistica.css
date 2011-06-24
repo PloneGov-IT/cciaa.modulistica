@@ -1,0 +1,26 @@
+/*
+ * Stili per la cartella della modulistica 
+ */
+
+table.modulisticaListing {
+	width: 97%;
+}
+
+#content .modulisticaListing a[href^="http:"] {
+	background-image: none;
+	padding: 0px;
+}
+
+table.modulisticaListing,
+table.modulisticaListing td,
+table.modulisticaListing th {
+	border-color: #999;
+}
+
+table.modulisticaListing th.modulisticaDocument {
+	background-color: transparent;
+}
+
+table.modulisticaListing tr.headingModuli th {
+	color: black;
+}

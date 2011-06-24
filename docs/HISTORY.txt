@@ -1,0 +1,17 @@
+Changelog
+=========
+
+2.0.0 first public release (2011-06-24)
+---------------------------------------
+
+* Migration to Plone 4.1 [keul]
+* Merged with ``cciaa.c3p.folder`` [keul]
+* Fully translated [keul]
+* Removed italian code (partially) [keul]
+
+1.2.1 (and before)
+------------------
+
+* A lot of Plone 2.1, then Plone 2.5 and finally Plone 3.3
+  changes
+

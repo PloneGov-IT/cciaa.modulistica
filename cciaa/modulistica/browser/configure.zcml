@@ -1,0 +1,30 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:browser="http://namespaces.zope.org/browser"
+    i18n_domain="cciaa.modulistica">
+
+    <include package="plone.app.contentmenu" />
+
+    <!-- -*- extra stuff goes here -*- -->
+    <browser:page
+	   name="cciaa_modulistica_view"
+	   class=".modulistica.ModulisticaView"
+	   template="cciaa_modulistica_view.pt"
+	   permission="zope2.View"
+	   for="..interfaces.CCIAAModAbleContent"
+	   />
+
+   <browser:menuItem
+        for="..interfaces.CCIAAModAbleContent"
+        menu="plone_displayviews"
+        title="Downloadable forms view"
+        action="@@cciaa_modulistica_view"
+        description="Show and organize files in the folder."
+        />
+
+    <browser:resourceDirectory
+        name="cciaa.modulistica.stylesheets"
+        directory="stylesheets"
+        />
+
+</configure>

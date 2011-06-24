@@ -1,0 +1,96 @@
+.. contents::
+
+Introduction
+============
+
+The italian word `modulistica`__ mean "documentation", "downloadable forms". 
+
+__ http://www.wordreference.com/iten/modulistica
+
+This product add to your Plone folders:
+
+* a new view ("*Downloadable forms view*") for display files in the folder
+* a new field, where you can enter a set of column names, used in the view
+
+This product has been designed for public organization, but can be used from any other company that
+need to display a large amount of file that need to be downloaded from visitors. 
+
+How to use the view
+===================
+
+This view will simply show in a table all files and links in the folder, ignoring all other
+stuff.
+
+Files are displayed in a two-column table.
+
+.. image:: http://keul.it/images/plone/cciaa.modulistica-2.0.0-01.png
+   :alt: Simple view, without related items
+
+You can optionally use a new field of the folder called *Columns titles* to control the heading of the table.
+If you don't provide a value for this field, no heading will be used. 
+
+How related items are used
+--------------------------
+
+If files have normal Plone related items, they are used to expand the table with more rows. This features is
+mainly used for giving secondary, alternative format for a downloadale document.
+
+.. image:: http://keul.it/images/plone/cciaa.modulistica-2.0.0-02.png
+   :alt: Main files with secondary ones
+
+Keep in mind that:
+
+* related items of Links are ignored
+* only related items of File and Link type are used
+
+Pages
+-----
+
+In facts the view also use Pages inside the folder, but for a special use case.
+
+Pages are loaded, and the body content is inserted inside a wide table header row. This can be useful if you
+need to comment a subset of files.
+
+.. image:: http://keul.it/images/plone/cciaa.modulistica-2.0.0-03.png
+   :alt: Table with comments
+
+You can use this feature for simple comment inside the table, or for provide a complex structure:
+
+.. image:: http://keul.it/images/plone/cciaa.modulistica-2.0.0-04.png
+   :alt: Table with (more) comments
+
+You can find a lot of additional examples in the `Modulistica section`__ of the Chamber of Commerce of Ferrara.
+
+__ http://www.fe.camcom.it/cciaa/modulistica-cciaa
+
+Dependency
+==========
+
+Tested on Plone 4.1
+
+TODO
+====
+
+This product has been originally developed for Plone 2, so it need fore sure some love and refactoring.
+
+Credits
+=======
+
+Developed with the support of `Camera di Commercio di Ferrara`__;
+Camera di Commercio di Ferrara supports the `PloneGov initiative`__.
+
+  .. image:: http://www.fe.camcom.it/cciaa-logo.png/
+     :alt: CCIAA Ferrara - logo
+
+__ http://www.fe.camcom.it/
+__ http://www.plonegov.it/
+
+Authors
+=======
+
+This product was developed by RedTurtle Technology team.
+
+.. image:: http://www.redturtle.net/redturtle_banner.png
+   :alt: RedTurtle Technology Site
+   :target: http://www.redturtle.net/
+

@@ -1,0 +1,226 @@
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
+      lang="en"
+      metal:use-macro="here/main_template/macros/master"
+      i18n:domain="cciaa.modulistica">
+<body>
+
+<metal:main fill-slot="main">
+    <tal:main-macro metal:define-macro="main">
+
+        <div tal:replace="structure provider:plone.abovecontenttitle" />
+        
+        <h1 tal:content="here/Title" class="documentFirstHeading">Folder title</h1>
+        
+        <div tal:replace="structure provider:plone.belowcontenttitle" />
+        
+        <p class="documentDescription" tal:condition="here/Description">
+            <span tal:content="here/Description">
+                Description
+            </span>
+        </p>
+        
+        <metal:listingmacro define-macro="listing">
+        <tal:foldercontents define="contentFilter python:{'portal_type':['File', 'Document', 'Link', ]};
+                            contentFilter contentFilter|request/contentFilter|nothing;
+                            limit_display limit_display|request/limit_display|nothing;
+                            more_url more_url|request/more_url|string:folder_contents;
+                            contentsMethod nocall:here/getFolderContents;
+                            folderContents folderContents|python:contentsMethod(contentFilter, batch=True);
+                            use_view_action site_properties/typesUseViewActionInListings;
+                            over_limit python: limit_display and len(folderContents) > limit_display;
+                            folderContents python: (over_limit and folderContents[:limit_display]) or folderContents;
+                            batch folderContents;
+                            member nocall:view/member;
+                            portal nocall:context/@@plone_portal_state/portal;
+                            isAnon view/isAnon;
+                            show_about python:not isAnon or site_properties.allowAnonymousViewAbout;
+                            related_items python:view.count_related_items(folderContents);
+							linkIcon string:$portal_url/link_icon.gif">
+        <tal:listing condition="folderContents"
+                     define="toLocalizedTime nocall:plone_view/toLocalizedTime;">
+
+            <!-- Navigation -->
+            <div metal:use-macro="here/batch_macros/macros/navigation" />
+            <table class="listing modulisticaListing" border="1"
+                   summary="Modulistica nella cartella">
+            <thead tal:condition="view/getColumns|nothing"
+                   tal:content="structure python:view.getTitles(folderContents)">
+                       Columns 1, column 2
+            </thead>
+            <tbody>
+            <tal:items repeat="item folderContents">
+                <tr metal:define-macro="listitem"
+                    tal:define="oddrow repeat/item/odd;"
+                    tal:attributes="class python:oddrow and 'even' or 'odd'">
+
+                    <th class="modulisticaDocument"
+                            tal:condition="python:item.portal_type=='Document'"
+                            tal:attributes="colspan python:2+related_items">
+                        <span tal:replace="structure python:view.getDocumentContentOf(item.getId)" />
+                    </th>
+
+                    <tal:files define="item_url item/getURL|item/absolute_url;
+                                       item_id item/getId|item/id;
+                                       item_title_or_id item/pretty_title_or_id;
+                                       item_description item/Description;
+                                       item_type item/portal_type;
+                                       item_modified item/ModificationDate;
+                                       item_created item/CreationDate;
+                                       item_creator item/Creator;
+                                       item_size item/getObjSize;
+                                       item_icon item/getIcon;"
+                                   condition="python:item_type=='File'">
+
+                        <td class="col2">
+                            <label class="formNameFile" tal:content="item_title_or_id">Moduloprincipale.pdf</label>
+                                <div class="discreet" tal:content="python: item_description">
+                                    Description
+                                </div>
+                        </td>
+                        <td class="col1">
+                            <a tal:attributes="href item_url">
+                                <img tal:condition="item_icon"
+                                     tal:attributes="src item_icon;
+                                                     alt python:view.getDownloadMessage(item_title_or_id, 'download');
+                                                     title item_size"
+                                    />
+                            </a>
+                        </td>
+                            
+                        <tal:related tal:condition="item/getRawRelatedItems">
+                            <td class="col3">
+                                <tal:related define="itemRelated python:context.portal_catalog(UID=item.getRawRelatedItems[0])"
+                                             condition="itemRelated">
+                                    <a tal:define="rel python:itemRelated[0];
+                                                   rel_size rel/getObjSize;
+                                                   rel_icon rel/getIcon;"
+                                           tal:attributes="href rel/getURL">
+                                        <tal:is_link condition="python:rel.portal_type == 'Link'">
+                                            <img title="Link"
+                                                 i18n:attributes="title"
+                                                 tal:attributes="src python:rel_icon or linkIcon;
+                                                                 alt python:view.getDownloadMessage(rel.Title, 'goto');"
+                                                />
+                                        </tal:is_link>
+                                        <tal:is_file condition="python:rel.portal_type == 'File'">
+                                            <img tal:condition="rel_icon"
+                                                 tal:attributes="src rel_icon;
+                                                                 alt python:view.getDownloadMessage(rel.Title, 'download');
+                                                                 title item_size"
+                                                />
+                                        </tal:is_file>
+                                    </a>
+                                </tal:related>
+                            </td>
+                         </tal:related>
+                 
+                         <tal:related tal:condition="python:item.getRawRelatedItems and len(item.getRawRelatedItems)>1"
+                                     tal:on-error="nothing">
+                            <td class="col3">
+                                <tal:related define="itemRelated python:context.portal_catalog(UID=item.getRawRelatedItems[1])"
+                                             condition="itemRelated">
+                                    <a tal:define="rel python:itemRelated[0];
+                                                   rel_size rel/getObjSize;
+                                                   rel_icon rel/getIcon;"
+                                       tal:attributes="href rel/getURL">
+                                      <tal:is_link condition="python:rel.portal_type == 'Link'">
+                                            <img title="Link"
+                                                 i18n:attributes="title"
+                                                 tal:attributes="src python:rel_icon or linkIcon;
+                                                                 alt python:view.getDownloadMessage(rel.Title, 'goto');"
+                                                />
+                                        </tal:is_link>
+                                        <tal:is_file condition="python:rel.portal_type == 'File'">
+                                            <img tal:condition="rel_icon"
+                                                 tal:attributes="src rel_icon;
+                                                                 alt python:view.getDownloadMessage(rel.Title, 'download');
+                                                                 title item_size"
+                                                />
+                                        </tal:is_file>
+                                     </a>
+                                </tal:related>
+                            </td>
+                          </tal:related>
+                              
+                        <tal:related tal:define="num_rel python:len(item.getRawRelatedItems)"
+                                     tal:condition="python: num_rel != 2 and related_items !=0">
+                             <span tal:replace="structure python:view.generateColumns(related_items,num_rel)"/>
+                        </tal:related>
+                   </tal:files>
+
+                   <tal:links define="item_url item/getURL|item/absolute_url;
+                                      item_remote_url item/getRemoteUrl;
+                                      item_id item/getId|item/id;
+                                      item_title_or_id item/pretty_title_or_id;
+                                      item_description item/Description;
+                                      item_type item/portal_type;
+                                      item_modified item/ModificationDate;
+                                      item_created item/CreationDate;
+                                      item_creator item/Creator;
+                                      item_size item/getObjSize;
+                                      item_icon item/getIcon;
+                                      item_path item/getPath;"
+                              condition="python:item_type=='Link'">
+
+                            <tal:link define="isRemote python:view.isRemote(item.getRemoteUrl)">
+
+                                <td class="col2">
+                                    <label class="formNameFile" tal:content="item_title_or_id">Plone homepage</label>
+                                    <div class="discreet"
+                                         tal:condition="item_description">
+                                             <span tal:replace="item_description" />
+                                            <tal:isRemote condition="isRemote">
+                                                <br/>
+                                                <span tal:omit-tag="" i18n:translate="">external link</span>
+                                            </tal:isRemote>
+                                    </div>
+                                </td>
+    
+                                <td class="col1">
+                                    <a tal:attributes="href item_remote_url;
+                                                       title python:isRemote and view.getExternalLinkMessage() or nothing">
+                                        <tal:image define="hasImage exists:python:path('here'+item_path.replace('/'+portal.getId(), '')+'/image_listing')">
+                                             <img tal:condition="hasImage"
+                                                 tal:attributes="src string:${item_url}/image_listing;
+                                                                  alt string:Visita $item_title_or_id" />
+                                            <img tal:condition="not:hasImage"
+                                                 tal:attributes="src string:$portal_url/link_icon.gif;
+                                                                  alt string:Visita $item_title_or_id" />
+                                        </tal:image>
+                                    </a>
+                                </td>
+
+                           <tal:related tal:condition="python:related_items !=0">
+                                <span tal:replace="structure python:view.generateColumns(related_items,0)"/>
+                            </tal:related>
+
+                            </tal:link>
+                        </tal:links>
+
+                    </tr>
+                    </tal:items>
+                </tbody>
+            </table>
+
+            <!-- Navigation -->
+            <div metal:use-macro="here/batch_macros/macros/navigation" />
+
+        </tal:listing>
+
+        <metal:empty metal:define-slot="no_items_in_listing">
+            <p class="discreet"
+               tal:condition="not: folderContents"
+               i18n:domain="plone"
+               i18n:translate="description_no_items_in_folder">
+                There are currently no items in this folder.
+            </p>
+        </metal:empty>
+
+        </tal:foldercontents>
+        </metal:listingmacro>
+        <div tal:replace="structure provider:plone.belowcontentbody" />
+    </tal:main-macro>
+</metal:main>
+
+</body>
+</html>
