@@ -1,2 +1,7 @@
+include *.txt
+
+recursive-include docs *
 recursive-include cciaa *
-global-exclude *pyc
+
+global-exclude *.pyc
+global-include *.mo

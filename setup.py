@@ -9,8 +9,8 @@ tests_require=['zope.testing']
 
 setup(name='cciaa.modulistica',
       version=version,
-      description="Additional special view for Plone folders with files inside",
-      long_description=open("README.txt").read() + "\n" +
+      description="An additional view for Plone folders, for better manage repository of files",
+      long_description=open("README.rst").read() + "\n" +
                        open(os.path.join("docs", "HISTORY.txt")).read(),
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
