@@ -1,6 +1,11 @@
 Changelog
 =========
 
+2.0.1 (2012-xx-xx)
+------------------
+
+* Fix UnicodeDecodeError in modulistica view [fdelia]
+
 2.0.0 first public release (2011-06-24)
 ---------------------------------------
 

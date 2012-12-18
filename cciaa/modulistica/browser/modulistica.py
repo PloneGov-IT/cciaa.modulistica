@@ -26,16 +26,26 @@ class ModulisticaView(BrowserView):
             return alt
         return self.IMG_TAG % (src, alt, title)
     
+    def safe_unicode(self, value):
+        if isinstance(value, unicode):
+            return value
+        elif isinstance(value, str):
+            try:
+                return unicode(value, 'utf-8')
+            except UnicodeDecodeError:
+                return unicode(value, 'utf-8', 'ignore')
+        return str(value)
+    
     def getDownloadMessage(self, title, type):
         """'download' or 'goto'"""
         if type=='download':
             return _('download_message',
                      default=u'Download the file ${title}',
-                     mapping={'title': title})
+                     mapping={'title': self.safe_unicode(title)})
         elif type=='goto':
             return _('goto_message',
                      default=u'Go to link ${title}',
-                     mapping={'title': title})            
+                     mapping={'title': self.safe_unicode(title)})            
         return None
     
     def generateColumns(self,related_items,num_rel):
