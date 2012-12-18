@@ -23,6 +23,13 @@ class TestView(TestCase):
         f1.edit(title='File 1', file='Lorem ipsum')
         self.assertTrue('Download the file File 1' in m())
 
+    def test_addFileWithUnicodeName(self):
+        m = self.getModulistica()
+        m.invokeFactory(type_name='File', id='f1')
+        f1 = getattr(m, 'f1')
+        f1.edit(title='File ùno', file='Lorem ipsum')
+        self.assertTrue(u'Download the file File ùno' in m())
+
     def test_addInternalLink(self):
         m = self.getModulistica()
         m.invokeFactory(type_name='Link', id='l1')

@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 
 version = '2.0.0'
 
-tests_require=['zope.testing']
+tests_require=['zope.testing', 'Products.PloneTestCase']
 
 setup(name='cciaa.modulistica',
       version=version,
@@ -15,6 +15,9 @@ setup(name='cciaa.modulistica',
       # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
       classifiers=[
         'Framework :: Plone',
+        'Framework :: Plone :: 4.0',
+        'Framework :: Plone :: 4.1',
+        'Framework :: Plone :: 4.2',
         'Intended Audience :: Developers',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: GNU General Public License (GPL)',
@@ -33,7 +36,7 @@ setup(name='cciaa.modulistica',
                         'archetypes.schemaextender'
                         ],
       tests_require=tests_require,
-      extras_require=dict(tests=tests_require),
+      extras_require=dict(test=tests_require),
       entry_points="""
       [z3c.autoinclude.plugin]
       target = plone
