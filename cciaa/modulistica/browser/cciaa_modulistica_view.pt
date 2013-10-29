@@ -158,7 +158,8 @@
                                       item_created item/CreationDate;
                                       item_creator item/Creator;
                                       item_size item/getObjSize;
-                                      item_icon item/getIcon;
+                                      link_icon string:$portal_url/++resource++link_icon.gif;
+                                      item_icon python:True and item.getIcon or link_icon;
                                       item_path item/getPath;"
                               condition="python:item_type=='Link'">
 
@@ -179,14 +180,8 @@
                                 <td class="col1">
                                     <a tal:attributes="href item_remote_url;
                                                        title python:isRemote and view.getExternalLinkMessage() or nothing">
-                                        <tal:image define="hasImage exists:python:path('here'+item_path.replace('/'+portal.getId(), '')+'/image_listing')">
-                                             <img tal:condition="hasImage"
-                                                 tal:attributes="src string:${item_url}/image_listing;
-                                                                  alt string:Visita $item_title_or_id" />
-                                            <img tal:condition="not:hasImage"
-                                                 tal:attributes="src string:$portal_url/++resource++link_icon.gif;
-                                                                  alt string:Visita $item_title_or_id" />
-                                        </tal:image>
+                                      <img tal:attributes="src item_icon;
+                                                           alt string:Visita $item_title_or_id" />
                                     </a>
                                 </td>
 
