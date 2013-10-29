@@ -18,7 +18,13 @@ table.modulisticaListing th {
 }
 
 table.modulisticaListing th.modulisticaDocument {
-	background-color: transparent;
+	background: none repeat scroll 0 0 #EFEFEF;
+    border-bottom: 1px solid #999999;
+    border-right: 1px solid #999999;
+    border-top: 1px solid #999999;
+    font-weight: normal;
+    padding: 0.25em 0.5em;
+    text-transform: none;
 }
 
 table.modulisticaListing tr.headingModuli th {

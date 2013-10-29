@@ -184,7 +184,7 @@
                                                  tal:attributes="src string:${item_url}/image_listing;
                                                                   alt string:Visita $item_title_or_id" />
                                             <img tal:condition="not:hasImage"
-                                                 tal:attributes="src string:$portal_url/link_icon.gif;
+                                                 tal:attributes="src string:$portal_url/++resource++link_icon.gif;
                                                                   alt string:Visita $item_title_or_id" />
                                         </tal:image>
                                     </a>
