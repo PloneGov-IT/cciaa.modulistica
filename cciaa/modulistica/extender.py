@@ -29,7 +29,8 @@ class FolderWithColumnsExtender(object):
                                 default=u"Put there, one per line (up to 4), columns titles that must be put on the top of the "
                                         u"created tables when using the files views. \n"
                                         u"Not providing those values will not display any table headers.",
-                                )
+                ),
+                condition="python:here.getLayout()=='cciaa_modulistica_view'",
             ),
             required=False,
         ),
