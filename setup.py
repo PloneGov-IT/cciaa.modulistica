@@ -3,7 +3,7 @@
 import os
 from setuptools import setup, find_packages
 
-version = '2.0.3.dev0'
+version = '2.1.0.dev0'
 
 tests_require=['zope.testing', 'Products.PloneTestCase']
 
@@ -18,13 +18,13 @@ setup(name='cciaa.modulistica',
         'Framework :: Plone :: 4.0',
         'Framework :: Plone :: 4.1',
         'Framework :: Plone :: 4.2',
-        'Intended Audience :: Developers',
+        'Framework :: Plone :: 4.3',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: GNU General Public License (GPL)',
         ],
       keywords='plone plonegov form file',
       author='RedTurtle Technology',
-      author_email='sviluppoplone@redturtle.net',
+      author_email='sviluppoplone@redturtle.it',
       url='http://plone.org/products/cciaa.modulistica',
       license='GPL',
       packages=find_packages(exclude=['ez_setup']),
@@ -33,7 +33,7 @@ setup(name='cciaa.modulistica',
       zip_safe=False,
       install_requires=['setuptools',
                         'Products.CMFPlone',
-                        'archetypes.schemaextender'
+                        'archetypes.schemaextender',
                         ],
       tests_require=tests_require,
       extras_require=dict(test=tests_require),

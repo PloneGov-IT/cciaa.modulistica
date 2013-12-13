@@ -3,7 +3,7 @@
 Introduction
 ============
 
-The italian word `modulistica`__ mean "documentation", "downloadable forms". 
+The italian word `modulistica`__ mean "*documentation*", "*downloadable forms*". 
 
 __ http://www.wordreference.com/iten/modulistica
 
@@ -27,12 +27,13 @@ Files are displayed in a two-column table.
    :alt: Simple view, without related items
 
 You can optionally use a new field of the folder called *Columns titles* to control the heading of the table.
-If you don't provide a value for this field, no heading will be used. 
+If you don't provide a value for this field, no heading will be used. Please note that the field is only
+displayed when the view is applied to the folder
 
-How related items are used
---------------------------
+Related items of files
+----------------------
 
-If files have normal Plone related items, they are used to expand the table with more rows. This features is
+If files have related items, they are used to expand the table with more columns. This features is
 mainly used for giving secondary, alternative format for a downloadale document.
 
 .. image:: http://keul.it/images/plone/cciaa.modulistica-2.0.0-02.png
@@ -40,8 +41,8 @@ mainly used for giving secondary, alternative format for a downloadale document.
 
 Keep in mind that:
 
-* related items of Links are ignored
-* only related items of File and Link type are used
+* related items of Link content type are ignored
+* only related items of type File or Link are used
 
 Pages
 -----
@@ -66,12 +67,7 @@ __ http://www.fe.camcom.it/cciaa/modulistica-cciaa
 Dependency
 ==========
 
-Tested on Plone 4.1
-
-TODO
-====
-
-This product has been originally developed for Plone 2, so it need fore sure some love and refactoring.
+Tested on Plone 4.3
 
 Credits
 =======
@@ -90,7 +86,7 @@ Authors
 
 This product was developed by RedTurtle Technology team.
 
-.. image:: http://www.redturtle.net/redturtle_banner.png
+.. image:: http://www.redturtle.it/redturtle_banner.png
    :alt: RedTurtle Technology Site
-   :target: http://www.redturtle.net/
+   :target: http://www.redturtle.it/
 
