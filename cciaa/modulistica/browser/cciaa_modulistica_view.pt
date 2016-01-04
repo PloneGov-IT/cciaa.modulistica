@@ -8,17 +8,17 @@
     <tal:main-macro metal:define-macro="main">
 
         <div tal:replace="structure provider:plone.abovecontenttitle" />
-        
+
         <h1 tal:content="here/Title" class="documentFirstHeading">Folder title</h1>
-        
+
         <div tal:replace="structure provider:plone.belowcontenttitle" />
-        
+
         <p class="documentDescription" tal:condition="here/Description">
             <span tal:content="here/Description">
                 Description
             </span>
         </p>
-        
+
         <metal:listingmacro define-macro="listing">
         <tal:foldercontents define="contentFilter python:{'portal_type':['File', 'Document', 'Link', ]};
                             contentFilter contentFilter|request/contentFilter|nothing;
@@ -68,7 +68,9 @@
                                        item_created item/CreationDate;
                                        item_creator item/Creator;
                                        item_size item/getObjSize;
-                                       item_icon item/getIcon;"
+                                       item_icon item/getIcon;
+                                       item_obj item/getObject;
+                                       item_related_items item_obj/getRawRelatedItems"
                                    condition="python:item_type=='File'">
 
                         <td class="col2">
@@ -86,10 +88,10 @@
                                     />
                             </a>
                         </td>
-                            
-                        <tal:related tal:condition="item/getRawRelatedItems">
+
+                        <tal:related condition="item_related_items">
                             <td class="col3">
-                                <tal:related define="itemRelated python:context.portal_catalog(UID=item.getRawRelatedItems[0])"
+                                <tal:related define="itemRelated python:context.portal_catalog(UID=item_related_items[0])"
                                              condition="itemRelated">
                                     <a tal:define="rel python:itemRelated[0];
                                                    rel_size rel/getObjSize;
@@ -113,11 +115,11 @@
                                 </tal:related>
                             </td>
                          </tal:related>
-                 
-                         <tal:related tal:condition="python:item.getRawRelatedItems and len(item.getRawRelatedItems)>1"
+
+                         <tal:related tal:condition="python:item_related_items and len(item_related_items)>1"
                                      tal:on-error="nothing">
                             <td class="col3">
-                                <tal:related define="itemRelated python:context.portal_catalog(UID=item.getRawRelatedItems[1])"
+                                <tal:related define="itemRelated python:context.portal_catalog(UID=item_related_items[1])"
                                              condition="itemRelated">
                                     <a tal:define="rel python:itemRelated[0];
                                                    rel_size rel/getObjSize;
@@ -141,8 +143,8 @@
                                 </tal:related>
                             </td>
                           </tal:related>
-                              
-                        <tal:related tal:define="num_rel python:len(item.getRawRelatedItems)"
+
+                        <tal:related tal:define="num_rel python:len(item_related_items)"
                                      tal:condition="python: num_rel != 2 and related_items !=0">
                              <span tal:replace="structure python:view.generateColumns(related_items,num_rel)"/>
                         </tal:related>
@@ -176,7 +178,7 @@
                                             </tal:isRemote>
                                     </div>
                                 </td>
-    
+
                                 <td class="col1">
                                     <a tal:attributes="href item_remote_url;
                                                        title python:isRemote and view.getExternalLinkMessage() or nothing">

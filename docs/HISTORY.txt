@@ -4,7 +4,7 @@ Changelog
 2.1.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fix getRawRelatedItems call in view and template [cekk]
 
 
 2.1.0 (2013-12-13)
@@ -19,7 +19,7 @@ Changelog
 2.0.2 (2012-12-18)
 ------------------
 
-- Fixed wrong MANIFEST file [keul] 
+- Fixed wrong MANIFEST file [keul]
 
 2.0.1 (2012-12-18)
 ------------------
@@ -39,4 +39,3 @@ Changelog
 
 * A lot of Plone 2.1, then Plone 2.5 and finally Plone 3.3
   changes
-
