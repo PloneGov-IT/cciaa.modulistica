@@ -1,7 +1,10 @@
 <?xml version="1.0"?>
- <object name="Folder" meta_type="Factory-based Type Information"
+ <object name="Folder" meta_type="Dexterity FTI"
     xmlns:i18n="http://xml.zope.org/namespaces/i18n" purge="False">
  	<property name="view_methods" purge="False">
-         <element value="cciaa_modulistica_view"/>
-     </property>
+		<element value="cciaa_modulistica_view"/>
+	</property>
+        <property name="behaviors" purge="false">
+            <element value="cciaa.modulistica.behaviors.folder_modulistica.IFolderWithColumnsExtension"/>
+        </property>
  </object>

@@ -11,14 +11,16 @@
 	   class=".modulistica.ModulisticaView"
 	   template="cciaa_modulistica_view.pt"
 	   permission="zope2.View"
-	   for="..interfaces.CCIAAModAbleContent"
+	   for="plone.app.contenttypes.content.Folder"
+	   layer="cciaa.modulistica.interfaces.ICCIAAModulisticaLayer"
 	   />
 
    <browser:menuItem
-        for="..interfaces.CCIAAModAbleContent"
+        for="plone.app.contenttypes.content.Folder"
         menu="plone_displayviews"
         title="Downloadable forms view"
         action="@@cciaa_modulistica_view"
+        layer="cciaa.modulistica.interfaces.ICCIAAModulisticaLayer"
         description="Show and organize files in the folder."
         />
 

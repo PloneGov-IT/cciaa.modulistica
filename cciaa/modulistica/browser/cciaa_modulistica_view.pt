@@ -1,6 +1,8 @@
-<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"
-      lang="en"
-      metal:use-macro="here/main_template/macros/master"
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:metal="http://xml.zope.org/namespaces/metal"
+      xmlns:tal="http://xml.zope.org/namespaces/tal"
+      xmlns:i18n="http://xml.zope.org/namespaces/i18n"
+      metal:use-macro="context/main_template/macros/master"
       i18n:domain="cciaa.modulistica">
 <body>
 
@@ -23,17 +25,12 @@
         <tal:foldercontents define="contentFilter python:{'portal_type':['File', 'Document', 'Link', ]};
                             contentFilter contentFilter|request/contentFilter|nothing;
                             limit_display limit_display|request/limit_display|nothing;
-                            more_url more_url|request/more_url|string:folder_contents;
                             contentsMethod nocall:here/getFolderContents;
                             folderContents folderContents|python:contentsMethod(contentFilter, batch=True);
-                            use_view_action site_properties/typesUseViewActionInListings;
                             over_limit python: limit_display and len(folderContents) > limit_display;
                             folderContents python: (over_limit and folderContents[:limit_display]) or folderContents;
                             batch folderContents;
-                            member nocall:view/member;
-                            portal nocall:context/@@plone_portal_state/portal;
                             isAnon view/isAnon;
-                            show_about python:not isAnon or site_properties.allowAnonymousViewAbout;
                             related_items python:view.count_related_items(folderContents);
 							linkIcon string:$portal_url/link_icon.gif">
         <tal:listing condition="folderContents"
@@ -59,8 +56,9 @@
                         <span tal:replace="structure python:view.getDocumentContentOf(item.getId)" />
                     </th>
 
-                    <tal:files define="item_url item/getURL|item/absolute_url;
-                                       item_id item/getId|item/id;
+                    <tal:files define="item item/getObject;
+		                       item_url item/absolute_url;
+                                       item_id item/id;
                                        item_title_or_id item/pretty_title_or_id;
                                        item_description item/Description;
                                        item_type item/portal_type;
@@ -68,9 +66,8 @@
                                        item_created item/CreationDate;
                                        item_creator item/Creator;
                                        item_size item/getObjSize;
-                                       item_icon item/getIcon;
-                                       item_obj item/getObject;
-                                       item_related_items item_obj/getRawRelatedItems"
+                                       item_icon string:'File';
+                                       item_related_items item/relatedItems"
                                    condition="python:item_type=='File'">
 
                         <td class="col2">
@@ -91,11 +88,10 @@
 
                         <tal:related condition="item_related_items">
                             <td class="col3">
-                                <tal:related define="itemRelated python:context.portal_catalog(UID=item_related_items[0])"
+                                <tal:related define="itemRelated python:item_related_items[0]"
                                              condition="itemRelated">
-                                    <a tal:define="rel python:itemRelated[0];
-                                                   rel_size rel/getObjSize;
-                                                   rel_icon rel/getIcon;"
+                                    <a tal:define="rel python:itemRelated.to_object;
+                                                   rel_icon string:'File';"
                                            tal:attributes="href rel/getURL">
                                         <tal:is_link condition="python:rel.portal_type == 'Link'">
                                             <img title="Link"
@@ -119,7 +115,7 @@
                          <tal:related tal:condition="python:item_related_items and len(item_related_items)>1"
                                      tal:on-error="nothing">
                             <td class="col3">
-                                <tal:related define="itemRelated python:context.portal_catalog(UID=item_related_items[1])"
+                                <tal:related define="itemRelated python:item_related_items[0])"
                                              condition="itemRelated">
                                     <a tal:define="rel python:itemRelated[0];
                                                    rel_size rel/getObjSize;

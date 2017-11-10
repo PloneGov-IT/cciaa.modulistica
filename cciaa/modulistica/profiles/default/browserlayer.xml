@@ -1,0 +1,7 @@
+<?xml version="1.0"?>
+<layers>
+  <layer
+    name="cciaa.modulistica"
+    interface="cciaa.modulistica.interfaces.ICCIAAModulisticaLayer"
+  />
+</layers>

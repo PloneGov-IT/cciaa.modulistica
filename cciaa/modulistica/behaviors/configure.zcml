@@ -1,0 +1,16 @@
+<configure
+  xmlns="http://namespaces.zope.org/zope"
+  xmlns:plone="http://namespaces.plone.org/plone"
+  i18n_domain="cciaa.modulistica">
+
+  <plone:behavior
+    title="Additional field for Folder"
+    name="folder-columns-extender"
+    description="Add a new field to a content (e.g a Folder) to store sectors id."
+    for="plone.app.contenttypes.content.Folder"
+    provides=".folder_modulistica.IFolderWithColumnsExtension"
+    marker=".folder_modulistica.IFolderWithColumnsExtension"
+    factory=".folder_modulistica.FolderWithColumnsExtension"
+  />
+
+</configure>

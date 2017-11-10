@@ -6,6 +6,12 @@ from zope.component import getMultiAdapter
 
 from cciaa.modulistica import modulisticaMessageFactory as _
 
+from zc.relation.interfaces import ICatalog
+from zope.component import getUtility
+from zope.intid.interfaces import IIntIds
+from Acquisition import aq_inner
+
+
 class ModulisticaView(BrowserView):
     """View for seeing the files in the folder"""
 
@@ -56,13 +62,23 @@ class ModulisticaView(BrowserView):
             stringa += "<td class=\"col3\"/>"
         return stringa
 
+#    def get_related_itmes(self, item):
+#        catalog = getUtility(ICatalog)
+#        intids = getUtility(IIntIds)
+#        query = {'to_id': intids.getId(aq_inner(item.getObject())),'from_attribute': 'relatedItems',}
+#        rel_items = []
+#        for rel in catalog.findRelations(query):
+#            obj = intids.queryObject(rel.from_id)
+#            rel_items.append(obj)
+#        return rel_items
+
     def count_related_items(self, items):
         """ return how many related items a file has, limited to 2"""
         max = 0
         for item in items:
             if item.portal_type == 'File':
                 try:
-                    rel_items = item.getObject().getRawRelatedItems()
+                    rel_items = item.getObject().relatedItems
                 except AttributeError:
                     # the item doesn't have related items behavior
                     rel_items = 0
@@ -73,7 +89,7 @@ class ModulisticaView(BrowserView):
         return max
 
     def getColumns(self):
-        return self.context.getField('columns').get(self.context)
+        return self.context.columns
 
     def getTitles(self, items):
         """

@@ -8,14 +8,9 @@
     <five:registerPackage package="." initialize=".initialize" />
     <i18n:registerTranslations directory="locales" />
 
-    <class class="Products.ATContentTypes.content.folder.ATFolder">
-  	   <implements interface=".interfaces.CCIAAModAbleContent" />
-    </class>
 
     <include package=".browser" />
-
-    <include package="archetypes.schemaextender" />
-    <adapter factory=".extender.FolderWithColumnsExtender" />
+    <include package=".behaviors" />
 
     <genericsetup:registerProfile
       name="default"
