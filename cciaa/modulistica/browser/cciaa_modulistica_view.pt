@@ -92,18 +92,18 @@
                                              condition="itemRelated">
                                     <a tal:define="rel python:itemRelated.to_object;
                                                    rel_icon string:'File';"
-                                           tal:attributes="href rel/getURL">
+                                           tal:attributes="href rel/absolute_url">
                                         <tal:is_link condition="python:rel.portal_type == 'Link'">
                                             <img title="Link"
                                                  i18n:attributes="title"
                                                  tal:attributes="src python:rel_icon or linkIcon;
-                                                                 alt python:view.getDownloadMessage(rel.Title, 'goto');"
+                                                                 alt python:view.getDownloadMessage(rel.Title(), 'goto');"
                                                 />
                                         </tal:is_link>
                                         <tal:is_file condition="python:rel.portal_type == 'File'">
                                             <img tal:condition="rel_icon"
                                                  tal:attributes="src rel_icon;
-                                                                 alt python:view.getDownloadMessage(rel.Title, 'download');
+                                                                 alt python:view.getDownloadMessage(rel.Title(), 'download');
                                                                  title item_size"
                                                 />
                                         </tal:is_file>
@@ -119,19 +119,19 @@
                                              condition="itemRelated">
                                     <a tal:define="rel python:itemRelated[0];
                                                    rel_size rel/getObjSize;
-                                                   rel_icon rel/getIcon;"
-                                       tal:attributes="href rel/getURL">
+                                                   rel_icon string:'File';"
+                                       tal:attributes="href rel/absolute_url">
                                       <tal:is_link condition="python:rel.portal_type == 'Link'">
                                             <img title="Link"
                                                  i18n:attributes="title"
                                                  tal:attributes="src python:rel_icon or linkIcon;
-                                                                 alt python:view.getDownloadMessage(rel.Title, 'goto');"
+                                                                 alt python:view.getDownloadMessage(rel.Title(), 'goto');"
                                                 />
                                         </tal:is_link>
                                         <tal:is_file condition="python:rel.portal_type == 'File'">
                                             <img tal:condition="rel_icon"
                                                  tal:attributes="src rel_icon;
-                                                                 alt python:view.getDownloadMessage(rel.Title, 'download');
+                                                                 alt python:view.getDownloadMessage(rel.Title(), 'download');
                                                                  title item_size"
                                                 />
                                         </tal:is_file>

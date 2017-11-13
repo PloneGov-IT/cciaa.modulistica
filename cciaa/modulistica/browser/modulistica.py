@@ -62,16 +62,6 @@ class ModulisticaView(BrowserView):
             stringa += "<td class=\"col3\"/>"
         return stringa
 
-#    def get_related_itmes(self, item):
-#        catalog = getUtility(ICatalog)
-#        intids = getUtility(IIntIds)
-#        query = {'to_id': intids.getId(aq_inner(item.getObject())),'from_attribute': 'relatedItems',}
-#        rel_items = []
-#        for rel in catalog.findRelations(query):
-#            obj = intids.queryObject(rel.from_id)
-#            rel_items.append(obj)
-#        return rel_items
-
     def count_related_items(self, items):
         """ return how many related items a file has, limited to 2"""
         max = 0
