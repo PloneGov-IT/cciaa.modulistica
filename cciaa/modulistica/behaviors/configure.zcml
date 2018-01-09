@@ -13,4 +13,6 @@
     factory=".folder_modulistica.FolderWithColumnsExtension"
   />
 
+  <adapter factory=".adapter.DexterityBehaviorAssignable" />
+
 </configure>

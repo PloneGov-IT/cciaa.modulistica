@@ -77,72 +77,70 @@
                                 </div>
                         </td>
                         <td class="col1">
-                            <a tal:attributes="href item_url">
+                            <a tal:attributes="href item_url" target="_blank">
                                 <img tal:condition="item_icon"
-                                     tal:attributes="src item_icon;
+                                     tal:attributes="src python:view.getMimeTypeIcon(item);
                                                      alt python:view.getDownloadMessage(item_title_or_id, 'download');
                                                      title item_size"
                                     />
                             </a>
+                            <p><span class="discreet" tal:define="date python:item.modified().strftime('%d/%m/%Y %H:%M:%S')"
+                            tal:content="python:'Ultima modifica: ' + date" /></p>
                         </td>
 
                         <tal:related condition="item_related_items">
                             <td class="col3">
-                                <tal:related define="itemRelated python:item_related_items[0]"
-                                             condition="itemRelated">
-                                    <a tal:define="rel python:itemRelated.to_object;
-                                                   rel_icon string:'File';"
-                                           tal:attributes="href rel/absolute_url">
+                                <tal:related define="rel python:item_related_items[0] and item_related_items[0].to_object"
+                                             condition="nocall:rel">
+                                    <a tal:attributes="href rel/absolute_url" target="_blank" >
                                         <tal:is_link condition="python:rel.portal_type == 'Link'">
                                             <img title="Link"
                                                  i18n:attributes="title"
-                                                 tal:attributes="src python:rel_icon or linkIcon;
-                                                                 alt python:view.getDownloadMessage(rel.Title(), 'goto');"
+                                                 tal:attributes="src string:++resource++cciaa.modulistica.images/globe.png;
+                                                                 alt python:view.getDownloadMessage(rel.title, 'goto');"
                                                 />
                                         </tal:is_link>
                                         <tal:is_file condition="python:rel.portal_type == 'File'">
-                                            <img tal:condition="rel_icon"
-                                                 tal:attributes="src rel_icon;
-                                                                 alt python:view.getDownloadMessage(rel.Title(), 'download');
+                                            <img tal:attributes="src python:view.getMimeTypeIcon(rel);
+                                                                 alt python:view.getDownloadMessage(rel.title, 'download');
                                                                  title item_size"
                                                 />
                                         </tal:is_file>
                                     </a>
+                                    <p><span class="discreet" tal:define="date python:rel.modified().strftime('%d/%m/%Y %H:%M:%S')"
+                                             tal:content="python:'Ultima modifica: ' + date" /></p>
                                 </tal:related>
                             </td>
                          </tal:related>
 
-                         <tal:related tal:condition="python:item_related_items and len(item_related_items)>1"
-                                     tal:on-error="nothing">
+                         <tal:related tal:condition="python:item_related_items and len(item_related_items)>1">
                             <td class="col3">
-                                <tal:related define="itemRelated python:item_related_items[0])"
-                                             condition="itemRelated">
-                                    <a tal:define="rel python:itemRelated[0];
-                                                   rel_size rel/getObjSize;
-                                                   rel_icon string:'File';"
-                                       tal:attributes="href rel/absolute_url">
+                                <tal:related define="rel python:item_related_items[1] and item_related_items[1].to_object"
+                                             condition="nocall:rel">
+                                    <a tal:attributes="href rel/absolute_url" target="_blank">
                                       <tal:is_link condition="python:rel.portal_type == 'Link'">
                                             <img title="Link"
                                                  i18n:attributes="title"
-                                                 tal:attributes="src python:rel_icon or linkIcon;
-                                                                 alt python:view.getDownloadMessage(rel.Title(), 'goto');"
+                                                 tal:attributes="src string:++resource++cciaa.modulistica.images/globe.png;
+                                                                 alt python:view.getDownloadMessage(rel.title, 'goto');"
                                                 />
                                         </tal:is_link>
                                         <tal:is_file condition="python:rel.portal_type == 'File'">
-                                            <img tal:condition="rel_icon"
-                                                 tal:attributes="src rel_icon;
-                                                                 alt python:view.getDownloadMessage(rel.Title(), 'download');
+                                            <img tal:attributes="src python:view.getMimeTypeIcon(rel);
+                                                                 alt python:view.getDownloadMessage(rel.title, 'download');
                                                                  title item_size"
                                                 />
                                         </tal:is_file>
                                      </a>
+                                     <p> <span class="discreet" tal:define="date python:rel.modified().strftime('%d/%m/%Y %H:%M:%S')"
+                                     tal:content="python:'Ultima modifica: ' + date" /></p>
                                 </tal:related>
                             </td>
                           </tal:related>
 
                         <tal:related tal:define="num_rel python:len(item_related_items)"
                                      tal:condition="python: num_rel != 2 and related_items !=0">
-                             <span tal:replace="structure python:view.generateColumns(related_items,num_rel)"/>
+                             <span tal:replace="structure python:view.generateColumns(related_items, num_rel)"/>
                         </tal:related>
                    </tal:files>
 
@@ -177,10 +175,17 @@
 
                                 <td class="col1">
                                     <a tal:attributes="href item_remote_url;
-                                                       title python:isRemote and view.getExternalLinkMessage() or nothing">
-                                      <img tal:attributes="src item_icon;
-                                                           alt string:Visita $item_title_or_id" />
+                                                       title python:isRemote and view.getExternalLinkMessage() or nothing"
+                                                       target="_blank">
+                                        <img title="Link"
+                                             i18n:attributes="title"
+                                             tal:attributes="src string:++resource++cciaa.modulistica.images/globe.png;
+                                                 alt python:view.getDownloadMessage(item.title, 'goto');"/>
+ 
+
                                     </a>
+                                    <p><span class="discreet" tal:define="date python:item.modified.strftime('%d/%m/%Y %H:%M:%S')"
+                                             tal:content="python:'Ultima modifica: ' + date" /></p>
                                 </td>
 
                            <tal:related tal:condition="python:related_items !=0">

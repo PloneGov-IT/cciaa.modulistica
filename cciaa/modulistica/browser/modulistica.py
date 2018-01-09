@@ -3,13 +3,10 @@
 from Products.Five import BrowserView
 from Products.CMFCore.utils import getToolByName
 from zope.component import getMultiAdapter
-
 from cciaa.modulistica import modulisticaMessageFactory as _
-
-from zc.relation.interfaces import ICatalog
-from zope.component import getUtility
-from zope.intid.interfaces import IIntIds
-from Acquisition import aq_inner
+from plone.app.layout.navigation.root import getNavigationRoot
+from Products.MimetypesRegistry.MimeTypeItem import guess_icon_path
+import os
 
 
 class ModulisticaView(BrowserView):
@@ -21,7 +18,8 @@ class ModulisticaView(BrowserView):
         """given an id, load from this folder a page"""
         context = self.context
         page = getattr(context, doc_id)
-        body = '<a name="section-'+ doc_id +'"></a>' + page.getText()
+        body = '<a name="section-' + doc_id + '"></a>' +\
+            (page.text and page.text.output or '')
         return body
 
     def generateImgTag(self, icon, alt="", title=""):
@@ -33,28 +31,28 @@ class ModulisticaView(BrowserView):
         return self.IMG_TAG % (src, alt, title)
 
     def safe_unicode(self, value):
-        if isinstance(value, unicode):
+        if isinstance(value, unicode):  # noqa
             return value
         elif isinstance(value, str):
             try:
-                return unicode(value, 'utf-8')
+                return unicode(value, 'utf-8')  # noqa
             except UnicodeDecodeError:
-                return unicode(value, 'utf-8', 'ignore')
+                return unicode(value, 'utf-8', 'ignore')  # noqa
         return str(value)
 
     def getDownloadMessage(self, title, type):
         """'download' or 'goto'"""
-        if type=='download':
+        if type == 'download':
             return _('download_message',
                      default=u'Download the file ${title}',
                      mapping={'title': self.safe_unicode(title)})
-        elif type=='goto':
+        elif type == 'goto':
             return _('goto_message',
                      default=u'Go to link ${title}',
                      mapping={'title': self.safe_unicode(title)})
         return None
 
-    def generateColumns(self,related_items,num_rel):
+    def generateColumns(self, related_items, num_rel):
         """Generate table columns"""
         var = related_items - num_rel
         stringa = ""
@@ -115,9 +113,27 @@ class ModulisticaView(BrowserView):
         return _(u'External link')
 
     def isAnon(self):
-        return getToolByName(self.context, 'portal_membership').isAnonymousUser()
+        return getToolByName(self.context,
+                             'portal_membership').isAnonymousUser()
 
     def member(self):
         portal_state = getMultiAdapter((self.context, self.request),
                                        name=u'plone_portal_state')
         return portal_state.member()
+
+    def getMimeTypeIcon(self, node):
+        try:
+            if node.portal_type != 'File':
+                return None
+            fileo = node.file
+            portal_url = getNavigationRoot(self.context)
+            mtt = getToolByName(self.context, 'mimetypes_registry')
+            if fileo.contentType:
+                ctype = mtt.lookup(fileo.contentType)
+                return os.path.join(
+                    portal_url,
+                    guess_icon_path(ctype[0])
+                )
+        except AttributeError:
+            return None
+        return None

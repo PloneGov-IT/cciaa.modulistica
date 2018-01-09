@@ -5,20 +5,21 @@ from setuptools import setup, find_packages
 
 version = '2.1.2.dev0'
 
-tests_require=['zope.testing', 'Products.PloneTestCase']
+tests_require = ['zope.testing', 'Products.PloneTestCase']
 
 setup(name='cciaa.modulistica',
       version=version,
-      description="An additional view for Plone folders, for better manage repository of files",
-      long_description=open("README.rst").read() + "\n" +
-                       open(os.path.join("docs", "HISTORY.txt")).read(),
-      # Get more strings from http://www.python.org/pypi?%3Aaction=list_classifiers
+      description="An additional view for Plone folders, for better manage"
+                  " repository of files",
+      long_description=open("README.rst").read() + "\n" + open(
+          os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
         'Framework :: Plone',
         'Framework :: Plone :: 4.0',
         'Framework :: Plone :: 4.1',
         'Framework :: Plone :: 4.2',
         'Framework :: Plone :: 4.3',
+        'Framework :: Plone :: 5.0',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: GNU General Public License (GPL)',
         ],
@@ -31,10 +32,10 @@ setup(name='cciaa.modulistica',
       namespace_packages=['cciaa', ],
       include_package_data=True,
       zip_safe=False,
-      install_requires=['setuptools',
-                        'Products.CMFPlone',
-                        'archetypes.schemaextender',
-                        ],
+      install_requires=[
+          'setuptools',
+          'Products.CMFPlone',
+      ],
       tests_require=tests_require,
       extras_require=dict(test=tests_require),
       entry_points="""

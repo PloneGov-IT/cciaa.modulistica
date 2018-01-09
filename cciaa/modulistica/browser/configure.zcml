@@ -29,4 +29,9 @@
         directory="stylesheets"
         />
 
+    <browser:resourceDirectory
+        name="cciaa.modulistica.images"
+        directory="images"
+        />
+
 </configure>
