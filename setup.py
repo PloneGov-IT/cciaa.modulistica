@@ -3,14 +3,14 @@
 import os
 from setuptools import setup, find_packages
 
-version = '2.1.2.dev0'
+version = '3.0.0.dev0'
 
 tests_require = ['zope.testing', 'Products.PloneTestCase']
 
 setup(name='cciaa.modulistica',
       version=version,
-      description="An additional view for Plone folders, for better manage"
-                  " repository of files",
+      description="An additional view for Plone folders, to improve"
+                  " management of repositories of files",
       long_description=open("README.rst").read() + "\n" + open(
           os.path.join("docs", "HISTORY.txt")).read(),
       classifiers=[
@@ -20,6 +20,7 @@ setup(name='cciaa.modulistica',
         'Framework :: Plone :: 4.2',
         'Framework :: Plone :: 4.3',
         'Framework :: Plone :: 5.0',
+        'Framework :: Plone :: 5.1',
         'Topic :: Software Development :: Libraries :: Python Modules',
         'License :: OSI Approved :: GNU General Public License (GPL)',
         ],

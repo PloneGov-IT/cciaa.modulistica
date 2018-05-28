@@ -3,17 +3,17 @@
 Introduction
 ============
 
-The italian word `modulistica`__ mean "*documentation*", "*downloadable forms*". 
+The italian word `modulistica`__ means "*documentation*", "*downloadable forms*". 
 
 __ http://www.wordreference.com/iten/modulistica
 
-This product add to your Plone folders:
+This product adds the following features to your Plone folders:
 
-* a new view ("*Downloadable forms view*") for display files in the folder
+* a new view ("*Downloadable forms view*") to display files in the folder
 * a new field, where you can enter a set of column names, used in the view
 
-This product has been designed for public organization, but can be used from any other company that
-need to display a large amount of file that need to be downloaded from visitors. 
+This product has been designed for public administration offices, but can be used from any other company that
+needs to display a large amount of files that can be downloaded from visitors. 
 
 How to use the view
 ===================
@@ -67,7 +67,7 @@ __ http://www.fe.camcom.it/cciaa/modulistica-cciaa
 Dependency
 ==========
 
-Tested on Plone 4.3
+Tested on Plone 4.3 and Plone 5
 
 Credits
 =======
