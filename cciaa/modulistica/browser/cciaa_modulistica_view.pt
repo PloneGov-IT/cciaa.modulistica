@@ -25,7 +25,8 @@
                             limit_display limit_display|request/limit_display|nothing;
                             more_url more_url|request/more_url|string:folder_contents;
                             contentsMethod nocall:here/getFolderContents;
-                            folderContents folderContents|python:contentsMethod(contentFilter, batch=True);
+			    folderContents folderContents|python:contentsMethod(contentFilter, batch=True);
+                            folderContents python: view.check_topic_contents(folderContents);
                             use_view_action site_properties/typesUseViewActionInListings;
                             over_limit python: limit_display and len(folderContents) > limit_display;
                             folderContents python: (over_limit and folderContents[:limit_display]) or folderContents;

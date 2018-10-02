@@ -12,6 +12,10 @@
   	   <implements interface=".interfaces.CCIAAModAbleContent" />
     </class>
 
+    <class class="Products.ATContentTypes.content.topic.ATTopic">
+  	   <implements interface=".interfaces.CCIAAModAbleContent" />
+    </class>
+
     <include package=".browser" />
 
     <include package="archetypes.schemaextender" />
@@ -24,5 +28,12 @@
       description="Some additional feature, mainly a new view, for make easy the download of forms and documents"
       provides="Products.GenericSetup.interfaces.EXTENSION"
       />
+
+    <genericsetup:upgradeStep
+      title="Upgrade from 1000 to 1100"
+      source="1000"
+      destination="1100"
+      handler="cciaa.modulistica.upgrades.upgrade_1000_to_1100"
+      profile="cciaa.modulistica:default"/>
 
 </configure>

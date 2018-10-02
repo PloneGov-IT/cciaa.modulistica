@@ -115,3 +115,8 @@ class ModulisticaView(BrowserView):
         portal_state = getMultiAdapter((self.context, self.request),
                                        name=u'plone_portal_state')
         return portal_state.member()
+
+    def check_topic_contents(self, items):
+        if self.context.portal_type == "Topic":
+	    return self.context.queryCatalog(batch=True);
+        return items
