@@ -137,3 +137,13 @@ class ModulisticaView(BrowserView):
         except AttributeError:
             return None
         return None
+
+    def get_rel_url(self, rel):
+        try:
+            if rel.portal_type == 'File':
+                return "%s/@@download/file/%s" % (rel.absolute_url(), rel.file.filename)
+            else:
+                return rel.absolute_url()
+        except AttributeError:
+            return ''
+        return ''

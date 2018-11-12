@@ -92,7 +92,7 @@
                             <td class="col3">
                                 <tal:related define="rel python:item_related_items[0] and item_related_items[0].to_object"
                                              condition="nocall:rel">
-                                    <a tal:attributes="href rel/absolute_url" target="_blank" >
+                                    <a tal:attributes="href python:view.get_rel_url(rel)" target="_blank">
                                         <tal:is_link condition="python:rel.portal_type == 'Link'">
                                             <img title="Link"
                                                  i18n:attributes="title"
@@ -117,7 +117,7 @@
                             <td class="col3">
                                 <tal:related define="rel python:item_related_items[1] and item_related_items[1].to_object"
                                              condition="nocall:rel">
-                                    <a tal:attributes="href rel/absolute_url" target="_blank">
+                                    <a tal:attributes="href python:view.get_rel_url(rel)" target="_blank">
                                       <tal:is_link condition="python:rel.portal_type == 'Link'">
                                             <img title="Link"
                                                  i18n:attributes="title"
