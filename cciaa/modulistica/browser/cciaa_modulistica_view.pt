@@ -65,7 +65,7 @@
                                        item_modified item/ModificationDate;
                                        item_created item/CreationDate;
                                        item_creator item/Creator;
-                                       item_size item/getObjSize;
+                                       item_size python:view.get_formatted_size(item);
                                        item_icon string:'File';
                                        item_related_items item/relatedItems"
                                    condition="python:item_type=='File'">
@@ -153,7 +153,7 @@
                                       item_modified item/ModificationDate;
                                       item_created item/CreationDate;
                                       item_creator item/Creator;
-                                      item_size item/getObjSize;
+                                      item_size python:view.get_formatted_size(item);
                                       link_icon string:$portal_url/++resource++link_icon.gif;
                                       item_icon python:True and item.getIcon or link_icon;
                                       item_path item/getPath;"

@@ -4,7 +4,8 @@ Changelog
 3.0.1 (unreleased)
 ------------------
 
-- Nothing changed yet.
+- Fixed obj size retrivial and unicode management. [daniele]
+- Plone5.2/5.1 and Python2/3 compatibility. [daniele]
 
 
 3.0.0 (2018-05-28)

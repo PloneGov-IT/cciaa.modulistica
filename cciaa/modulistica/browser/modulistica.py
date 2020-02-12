@@ -7,6 +7,13 @@ from cciaa.modulistica import modulisticaMessageFactory as _
 from plone.app.layout.navigation.root import getNavigationRoot
 from Products.MimetypesRegistry.MimeTypeItem import guess_icon_path
 import os
+import six
+
+SIZE_CONST = {
+    'KB': 1024,
+    'MB': 1024 * 1024,
+    'GB': 1024 * 1024 * 1024}
+SIZE_ORDER = ('GB', 'MB', 'KB')
 
 
 class ModulisticaView(BrowserView):
@@ -31,13 +38,23 @@ class ModulisticaView(BrowserView):
         return self.IMG_TAG % (src, alt, title)
 
     def safe_unicode(self, value):
-        if isinstance(value, unicode):  # noqa
-            return value
-        elif isinstance(value, str):
-            try:
-                return unicode(value, 'utf-8')  # noqa
-            except UnicodeDecodeError:
-                return unicode(value, 'utf-8', 'ignore')  # noqa
+        if six.PY2:
+            if isinstance(value, unicode):  # noqa
+                return value
+            elif isinstance(value, str):
+                try:
+                    return unicode(value, 'utf-8')  # noqa
+                except UnicodeDecodeError:
+                    return unicode(value, 'utf-8', 'ignore')  # noqa
+        elif six.PY3:
+            if isinstance(value, str):  # noqa
+                return value
+            elif isinstance(value, bytes):
+                try:
+                    return str(value)  # noqa
+                except:
+                    return str(value)  # noqa
+
         return str(value)
 
     def getDownloadMessage(self, title, type):
@@ -137,3 +154,32 @@ class ModulisticaView(BrowserView):
         except AttributeError:
             return None
         return None
+
+    def get_formatted_size(self, content_file):
+        smaller = SIZE_ORDER[-1]
+        # allow arbitrary sizes to be passed through,
+        # if there is no size, but there is an object
+        # look up the object, this maintains backwards
+        # compatibility
+        if hasattr(content_file, 'get_size'):
+            size = content_file.get_size()
+        elif hasattr(content_file, 'size'):
+            size = content_file.size
+        elif hasattr(content_file, 'getSize'):
+            size = content_file.getSize()
+        elif hasattr(content_file, 'getObjSize'):
+            size = content_file.getObjSize()
+        # if the size is a float, then make it an int
+        # happens for large files
+        try:
+            size = int(size)
+        except (ValueError, TypeError):
+            return ''
+        if not size:
+            return ''
+        if size < SIZE_CONST[smaller]:
+            return '1 {0}'.format(smaller)
+        for c in SIZE_ORDER:
+            if int(size / SIZE_CONST[c]) > 0:
+                break
+        return '%.1f %s' % (float(size / float(SIZE_CONST[c])), c)
