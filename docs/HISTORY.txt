@@ -5,6 +5,7 @@ Changelog
 ------------------
 
 - Fixed obj size retrivial and unicode management. [daniele]
+- Improved size format output [daniele]
 - Plone5.2/5.1 and Python2/3 compatibility. [daniele]
 
 
