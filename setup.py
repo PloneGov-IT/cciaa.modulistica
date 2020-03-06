@@ -3,7 +3,7 @@
 import os
 from setuptools import setup, find_packages
 
-version = '3.0.1'
+version = '3.0.2.dev0'
 
 tests_require = ['zope.testing', 'Products.PloneTestCase']
 
